@@ -1,0 +1,8 @@
+在windows上安装git 主要为上传本机上的各种项目文件。
+第一步：下载windows版本的git 下载后按照网上教程进行安装 安装后直接运行git-bash 则不需要配置环境变量。
+第二步：安装后 在git自己打开的命令行中开始执行如下命令 
+  git version  -->git version 2.20.1.windows.1  证明安装成功
+  cd ~/.ssh    -->cd: /c/Users/dell/.ssh: No such file or directory 看是否需要配置github的ssh密钥  根据显示为无法找到该文件 则要创建新的ssh key;
+  ssh-keygen -t rsa -C "your_email@youremail.com"
+  .....未完待续
+  
