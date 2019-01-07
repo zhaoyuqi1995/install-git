@@ -1,8 +1,34 @@
 在windows上安装git 主要为上传本机上的各种项目文件。
 第一步：下载windows版本的git 下载后按照网上教程进行安装 安装后直接运行git-bash 则不需要配置环境变量。
-第二步：安装后 在git自己打开的命令行中开始执行如下命令 
+第二步：安装后 在git自己打开的命令行中开始执行如下命令
+
+1 获取git版本
   git version  -->git version 2.20.1.windows.1  证明安装成功
-  cd ~/.ssh    -->cd: /c/Users/dell/.ssh: No such file or directory 看是否需要配置github的ssh密钥  根据显示为无法找到该文件 则要创建新的ssh key;
-  ssh-keygen -t rsa -C "your_email@youremail.com"
-  .....未完待续
-  
+2 看是否需要配置github的ssh密钥
+  cd ~/.ssh    -->cd: /c/Users/dell/.ssh: No such file or directory   根据显示为无法找到该文件 则要创建新的ssh key;
+3 创建ssh
+  ssh-keygen -t rsa -C "your_email@youremail.com"  -->会在.ssh目录下生成文件（C:\Users\dell\.ssh）id_rsa和id_rsa.pub
+                                                      .ssh目录下的id_rsa.pub文件，复制里面的内容 
+                                                      点击github头像上settings 选择SSH and GPG keys->Add new  SSH keys -->将内容黏贴至key中
+                                                      title可以不填 之后确认该账号密码 即为添加成功
+4 创建ssh后进行认证
+  ssh -T git@github.com       
+5 设置git信息 设置后将会在C:\Users\dell中生成.gitconfig配置文件
+  git config --global user.name "你的姓名"
+  git config --global user.email "你的邮箱"  
+以上则完成配置。
+
+1 新建文件夹 若想为git工作区 执行  git init
+2 git分为工作区 缓存区 本地仓库 远程仓库
+  查看状态              git status
+  工作区-->缓存区        git add 文件
+  缓存区-->本地仓库      git commit -m '提交信息说明'
+  查看提交记录           git log
+  本地仓库关联远程仓库    git remote add orgin git@github.com:zhaoyuqi1995/mining.git
+                        orgin 为远程仓库别名 任意
+                        git@github.com:zhaoyuqi1995/mining.git 为远程仓库地址 可使用SSH或HTTPS
+  从远程仓库克隆          git clone git@github.com:zhaoyuqi1995/mining.git
+  从远程仓库更新本地仓库   git pull orgin master
+                         master 为分支
+                         当使用（git remote add origin...时 执行出现fatal: refusing to merge unrelated histories时） 后缀添加--allow-unrelated-histories
+  从本地仓库上传至远程仓库  git push origin master
